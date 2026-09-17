@@ -120,11 +120,11 @@ def head(css_href):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>From Grades to Growth | Ottawa Student Workshops</title>
-<meta name="description" content="Practical, research-informed workshops for Ottawa students in Grades 6–12. Register for Seminar 1 on September 25, 2026.">
+<title>From Grades to Growth | Ottawa Workshops for Grades 6–12</title>
+<meta name="description" content="Hands-on, research-backed workshops in Ottawa for Grades 6–12 — practical study, memory, and mindset strategies that boost grades and durable learning. Register now.">
 <link rel="canonical" href="{BASE}/">
-<meta property="og:title" content="From Grades to Growth | Ottawa Student Workshops">
-<meta property="og:description" content="Help your student learn more deeply, build confidence, and develop habits for school and life.">
+<meta property="og:title" content="From Grades to Growth | Ottawa Workshops for Grades 6–12">
+<meta property="og:description" content="Practical, research-informed workshops in Ottawa for Grade 6–12 students. Students practise retrieval, spacing, memory techniques, and mindset tools to improve grades and learning that lasts. Space is limited — register today.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{BASE}/">
 <meta name="twitter:card" content="summary_large_image">
