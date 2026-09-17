@@ -29,7 +29,6 @@
 
   --sun: oklch(0.78 0.132 80);
   --sun-soft: oklch(0.92 0.09 85);
-  --sky: oklch(0.94 0.046 220);
   --leaf: oklch(0.48 0.09 125);
   --sage: oklch(0.9 0.055 125);
   --navy-deep: oklch(0.19 0.052 158);
@@ -75,7 +74,6 @@ section { padding-block: 5rem; }
 @media (min-width: 64rem) { section { padding-block: 7rem; } }
 
 .bg-primary { background: var(--primary); color: var(--primary-foreground); }
-.bg-sky { background: var(--sky); }
 .bg-sage { background: var(--sage); }
 .bg-navy-deep { background: var(--navy-deep); color: var(--primary-foreground); }
 
@@ -265,7 +263,14 @@ section { padding-block: 5rem; }
 .form-submit { margin-top: 1.5rem; }
 .form-note { margin-top: 1rem; font-size: 0.75rem; line-height: 1.6; color: var(--muted-foreground); }
 .form-error { font-size: 0.875rem; font-weight: 600; color: var(--destructive); }
+.hp { position: absolute; left: -9999px; }
 .form-success { display: flex; min-height: 430px; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+/* .form-success sets its own `display`, which (by CSS origin rules) beats the
+   user-agent stylesheet's `[hidden]{display:none}` even though both have the
+   same specificity — so without this rule, the "Thank you!" panel showed on
+   first page load, not just after a successful submit. This selector's higher
+   specificity restores `hidden` while the attribute is present. */
+.form-success[hidden] { display: none; }
 .form-success .check { display: flex; height: 4rem; width: 4rem; align-items: center; justify-content: center; border-radius: 999px; background: var(--sage); color: var(--leaf); }
 .form-success h3 { margin-top: 1.5rem; font-size: 1.5rem; color: var(--primary); }
 .form-success p { margin-top: 0.75rem; max-width: 28rem; color: var(--muted-foreground); }

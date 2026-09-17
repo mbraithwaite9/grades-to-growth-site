@@ -20,7 +20,7 @@ migration playbook, both kept in the Dropbox project folder
 | Publish directory | `site` |
 | Build command | none |
 | Netlify account | **A separate account from the one used for AutoTech Fusion / Ottawa ATC — do not connect this to that team.** Which account, TBD. |
-| Form backend | Supabase (see `build.py` for URL/key — public/publishable key, safe client-side) |
+| Form backend | Netlify Forms (no database — submissions show up under Forms in the Netlify dashboard) |
 
 The old Lovable-synced repo, `mbraithwaite9/grades-to-growth`, is a separate, unrelated repo
 kept as a backup for now. It is not connected to this one.
@@ -123,8 +123,8 @@ site/                 generated output, this is what Netlify serves
 
 ## Before launch
 
-1. **Replace the placeholder Facilitator bio.** The "Facilitator" section still has
-   `[Facilitator Name]`, carried over verbatim from the Lovable original.
-2. **Test the "Stay Updated" form end-to-end** — submit it and confirm a row lands in the
-   Supabase `parent_interest_submissions` table. Visual QA is done; this functional check
-   is not yet done.
+1. ~~Replace the placeholder Facilitator bio.~~ Done — real photo and bio are in place.
+2. **Test the "Stay Updated" form end-to-end** on the live Netlify deploy — submit it and
+   confirm it shows up under **Forms** in the Netlify dashboard. Visual QA is done; this
+   functional check is not yet done (Python's local dev server used for previews doesn't
+   support POST, so this can only be confirmed on the real deploy).

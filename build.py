@@ -9,11 +9,13 @@ Single-page site. Everything the page says lives in this file (or in
 assets/), so a change here rebuilds the page. Edit the data below, re-run,
 commit.
 
-The "Stay Updated" form posts straight from the browser to the same
-Supabase table the original Lovable project used (public insert-only
-policy, so the publishable key below is meant to be public — same as
-Supabase's own recommended client-side pattern). Nothing else about this
-site depends on Lovable.
+The "Stay Updated" form submits straight to Netlify Forms (data-netlify
+on the <form>, plus an AJAX POST to "/" so the page doesn't reload).
+Submissions land in the Netlify dashboard for this site, with optional
+email notifications — no database needed. (An earlier version of this
+form also wrote to a Supabase table that Lovable had auto-provisioned
+for the original site; that write was removed since nobody had confirmed
+access to that Supabase project.)
 """
 
 import os, shutil, hashlib, datetime
@@ -23,8 +25,6 @@ BASE = "https://fromgradestogrowth.com"   # change here if the domain changes
 OUT = "site"
 SITE_NAME = "From Grades to Growth"
 REGISTER_URL = "https://txoasdni.formester.com/f/6oq4lOZ4D"
-SUPABASE_URL = "https://xjeqvuegoqoghvuwonul.supabase.co"
-SUPABASE_KEY = "sb_publishable_Koimgq5gReAqqB7CqU_7vQ_qbuxfwou"
 BUILT = datetime.date.today().isoformat()
 
 CSS_SRC = os.path.join("assets", "css", "site.css")
@@ -121,7 +121,7 @@ def head(css_href):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>From Grades to Growth | Ottawa Student Workshops</title>
-<meta name="description" content="Practical, research-informed workshops for Ottawa students in Grades 6–12. Register for Seminar 1 on September 19, 2026.">
+<meta name="description" content="Practical, research-informed workshops for Ottawa students in Grades 6–12. Register for Seminar 1 on September 25, 2026.">
 <link rel="canonical" href="{BASE}/">
 <meta property="og:title" content="From Grades to Growth | Ottawa Student Workshops">
 <meta property="og:description" content="Help your student learn more deeply, build confidence, and develop habits for school and life.">
@@ -131,6 +131,15 @@ def head(css_href):
 <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/img/favicon-180.png">
 <link rel="stylesheet" href="/assets/css/{css_href}">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2R8999RJ0R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2R8999RJ0R');
+</script>
 </head>
 """
 
@@ -222,7 +231,7 @@ def seminar_html():
         <div class="seminar-callout">{icon("lightbulb", "icon-sm")}<p>Students will practise the methods in the room—not just hear about them.</p></div>
       </div>
       <aside class="seminar-card">
-        <div class="seminar-row">{icon("calendar-days", "icon-sm")}<div><strong>Saturday, September 19, 2026</strong><p class="muted">Pizza Dinner: 4:30–5:00 p.m.<br>Seminar: 5:00–7:30 p.m.</p></div></div>
+        <div class="seminar-row">{icon("calendar-days", "icon-sm")}<div><strong>Friday, September 25, 2026</strong><p class="muted">Pizza Dinner: 5:00–5:30 p.m.<br>Seminar: 5:30–8:00 p.m.</p></div></div>
         <div class="divider"></div>
         <div class="seminar-row">{icon("map-pin", "icon-sm")}<div><strong>Ottawa Bahá’í Centre</strong><p class="muted">211 McArthur Ave, Ottawa</p></div></div>
         <div class="divider"></div>
@@ -292,7 +301,7 @@ def difference_html():
         f'<div><h3>{esc(title)}</h3><p>{esc(text)}</p></div></div>'
         for title, text in DIFFERENCES
     )
-    return f"""<section class="bg-sky">
+    return f"""<section class="bg-sage">
   <div class="parallax-banner" style="background-image:url('/assets/img/workshop-session.jpg')" role="img" aria-label="Martin leading a seminar with a group of students seated in a circle"></div>
   <div class="container difference-content">
     {section_heading("What makes this different", "More than productivity tips")}
@@ -316,7 +325,7 @@ def facilitator_html():
           <p>Martin is an experienced educator and mentor dedicated to helping young people thrive both academically and personally. Over the past decade, he has guided students across Canada, Mainland China, and Macau, teaching within both public and private systems across local and international (IB) curricula. He has taught IB Psychology, university-level business and computer science, and moral empowerment and character development programs.</p>
           <p>Having benefited from study skills workshops firsthand as a student, Martin is passionate about facilitating this series to help learners connect practical academic strategies with deeper questions of personal growth and purpose.</p>
         </div>
-        <blockquote class="facilitator-quote">“When we connect daily study habits with a deeper sense of purpose, students don’t just achieve better results—they gain the agency to shape their own futures.”</blockquote>
+        <blockquote class="facilitator-quote">“This is a collaborative process where students are the protagonists of their own learning. They connect daily study habits with a deeper sense of purpose, not just for better results at school but to improve their ability to shape their future.”</blockquote>
       </div>
     </div>
   </div>
@@ -338,7 +347,9 @@ def updates_html():
           <h3>Thank you!</h3>
           <p>We’ll keep you informed about upcoming From Grades to Growth seminars.</p>
         </div>
-        <form id="updates-form" class="updates-form">
+        <form id="updates-form" class="updates-form" name="parent-interest" method="POST" data-netlify="true" netlify-honeypot="company-website">
+          <input type="hidden" name="form-name" value="parent-interest">
+          <p class="hp"><label>Do not fill this in: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
           <label class="field">Parent / Guardian Name<input name="parentName" type="text" required maxlength="100"></label>
           <label class="field">Parent / Guardian Email Address<input name="email" type="email" required maxlength="255"></label>
           <label class="field">Children’s Names and Grades<textarea name="childrenGrades" required maxlength="1000" rows="3" placeholder="e.g., Maya — Grade 7; Daniel — Grade 10"></textarea></label>
@@ -362,7 +373,7 @@ def footer_html():
   <div class="container footer-grid">
     <div>
       <p class="brand-name">From Grades to Growth</p>
-      <p class="tagline">Practical learning workshops for Ottawa students in Grades 6–12.</p>
+      <p class="tagline">Practical learning workshops for students in Grades 6–12.</p>
     </div>
     <div><p class="footer-hosted">Hosted in Ottawa, Canada</p></div>
     <div class="footer-col-right">
@@ -404,29 +415,51 @@ def form_script():
   var submitBtn = document.getElementById("updates-submit");
   if (!form) return;
 
+  function encodeForm(data) {{
+    return Object.keys(data)
+      .map(function (k) {{ return encodeURIComponent(k) + "=" + encodeURIComponent(data[k] == null ? "" : data[k]); }})
+      .join("&");
+  }}
+
   form.addEventListener("submit", function (event) {{
     event.preventDefault();
     errorEl.hidden = true;
+
+    var data = new FormData(form);
+
+    // Honeypot: real visitors never fill this in. If it's filled, quietly
+    // pretend success without writing anywhere, instead of tipping off the bot.
+    if (String(data.get("company-website") || "").trim()) {{
+      form.hidden = true;
+      success.hidden = false;
+      return;
+    }}
+
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending\\u2026";
 
-    var data = new FormData(form);
-    var payload = {{
-      parent_name: String(data.get("parentName") || "").trim(),
-      email: String(data.get("email") || "").trim(),
-      children_grades: String(data.get("childrenGrades") || "").trim(),
-      referral_source: String(data.get("referralSource") || "").trim() || null,
-      comments: String(data.get("comments") || "").trim() || null,
-    }};
+    var parentName = String(data.get("parentName") || "").trim();
+    var email = String(data.get("email") || "").trim();
+    var childrenGrades = String(data.get("childrenGrades") || "").trim();
+    var referralSource = String(data.get("referralSource") || "").trim();
+    var comments = String(data.get("comments") || "").trim();
 
-    fetch("{SUPABASE_URL}/rest/v1/parent_interest_submissions", {{
+    // Netlify Forms is the only backend: this AJAX POST is what saves the
+    // submission (visible in the Netlify dashboard, with optional email
+    // notifications) — it's what preventDefault above stopped a normal
+    // browser form submission from doing automatically.
+    fetch("/", {{
       method: "POST",
-      headers: {{
-        "Content-Type": "application/json",
-        "apikey": "{SUPABASE_KEY}",
-        "Prefer": "return=minimal",
-      }},
-      body: JSON.stringify(payload),
+      headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
+      body: encodeForm({{
+        "form-name": "parent-interest",
+        "company-website": "",
+        parentName: parentName,
+        email: email,
+        childrenGrades: childrenGrades,
+        referralSource: referralSource,
+        comments: comments,
+      }}),
     }})
       .then(function (res) {{
         if (!res.ok) throw new Error("We couldn\\u2019t save your details. Please try again.");
