@@ -64,8 +64,8 @@ def icon(name, cls=""):
 # ---------------------------------------------------------------- DATA
 NAV_LINKS = [
     ("About the Series", "#about"),
-    ("Upcoming Seminar", "#seminar"),
     ("Future Seminars", "#journey"),
+    ("Upcoming Seminar", "#seminar"),
     ("Facilitator", "#facilitator"),
     ("Stay Updated", "#updates"),
 ]
@@ -73,7 +73,7 @@ NAV_LINKS = [
 BENEFITS = [
     ("brain", "Learn more effectively", "Replace ineffective habits with strategies that build durable learning."),
     ("target", "Improve academic performance", "Identify practical, often overlooked factors that influence grades."),
-    ("book-open-check", "Build confidence through evidence", "Tell the difference between recognizing information and truly knowing it."),
+    ("book-open-check", "Differentiation skills", "Tell the difference between remembering information and understanding concepts."),
     ("sparkles", "Develop beyond school", "Connect academic success with purpose, responsibility, and personal growth."),
 ]
 
@@ -91,19 +91,19 @@ SEMINARS = [
          text="Retrieval practice, spacing, test preparation, attendance, communicating with teachers, and the difference between memorizing information and understanding concepts.",
          active=True),
     dict(number="02", label="Seminar 2 · Coming Next",
-         title="Memory Techniques: Remember More, Forget Less",
-         text="Visualization, association, chunking, storytelling, memory palaces, retrieval practice, spaced review—and the important limits of mnemonics.",
+         title="Memory Techniques: Remember More, For Longer",
+         text="Visualization, association, chaining, storytelling, memory palaces, mnemonics, retrieval practice—with a section on French vocabulary",
          requirement="Requires Seminar 1"),
     dict(number="03–04", label="Seminars 3 & 4 · Future Sessions",
-         title="Learning With Purpose, Clarity, and Good Judgment",
-         text="Purpose, mindset, critical and scientific thinking, recognizing misinformation, using AI wisely, and developing responsibility and agency.",
+         title="Learning With Purpose",
+         text="Mindset, purpose, critical and scientific thinking, recognizing misinformation, and using technology effectively.",
          requirement="Requires Seminar 2"),
 ]
 
 DIFFERENCES = [
     ("Evidence-informed, not fad-driven", "Students learn strategies supported by research—not just whatever feels productive in the moment."),
     ("Honest about effort", "Effective learning often feels harder than rereading or cramming, but it leads to better retention and stronger results."),
-    ("Focused on the whole student", "Grades matter, but so do confidence, purpose, integrity, curiosity, and the ability to use technology wisely."),
+    ("Focused on the whole student", "Grades matter, but so does learning, finding meaning, and nurturing curiosity and interests."),
 ]
 
 REFERRAL_OPTIONS = ["Friend or family member", "School or teacher", "Community group", "Social media", "Other"]
@@ -176,15 +176,13 @@ def hero_html():
   <div class="scrim"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <p class="pill">{icon("users")} For Ottawa students in Grades 6–12</p>
+      <p class="pill">{icon("users", "icon-xs")} For Grade 6–12 students</p>
       <h1>From Grades<br>to <span class="accent">Growth</span></h1>
-      <p class="hero-sub">Practical workshops that help students improve their grades, learn more deeply, build confidence, and develop habits for school—and for life.</p>
-      <p class="hero-body">Most students are told to “study harder,” “review,” or “pay attention”—but are rarely taught how to do those things effectively. This series gives students practical, research-informed strategies they can use immediately.</p>
+      <p class="hero-sub">Practical workshops that help students<br>improve their grades, learn and think more deeply,<br>and develop habits for school and life.</p>
+      <p class="hero-body">This series gives students practical,<br>research-informed strategies<br>they can use immediately.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right")}</a>
-        <a href="#about" class="link-arrow">Explore the workshop series {icon("arrow-down")}</a>
+        <a class="btn btn-primary btn-lg" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>
       </div>
-      <p class="hero-meta">Grades 6–12 · Ottawa, Ontario</p>
     </div>
   </div>
 </section>
@@ -193,7 +191,7 @@ def hero_html():
 
 def about_html():
     cards = "".join(
-        f'<article class="card"><span class="icon-badge">{icon(ic)}</span>'
+        f'<article class="card"><span class="icon-badge">{icon(ic, "icon-sm")}</span>'
         f'<h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
         for ic, title, text in BENEFITS
     )
@@ -220,18 +218,17 @@ def seminar_html():
       <div>
         {section_heading("Upcoming session · Seminar 1", "Study Skills That Actually Work", light=True)}
         <p class="seminar-kicker">Grades, Learning, and How to Learn More Deeply</p>
-        <p class="hero-sub" style="margin-top:2rem;">Study less blindly. Learn more deeply.</p>
-        <p class="lede on-dark" style="max-width:42rem;">Most students are told to “study harder,” “review,” or “pay attention”—but are rarely shown how. This interactive session gives students practical, research-informed strategies to improve both short-term performance and learning that lasts.</p>
-        <div class="seminar-callout">{icon("lightbulb")}<p>Students will practise the methods in the room—not just hear about them.</p></div>
+        <p class="hero-sub on-dark" style="margin-top:2rem;">Study less blindly. Learn more deeply.</p>
+        <div class="seminar-callout">{icon("lightbulb", "icon-sm")}<p>Students will practise the methods in the room—not just hear about them.</p></div>
       </div>
       <aside class="seminar-card">
-        <div class="seminar-row">{icon("calendar-days")}<div><strong>Saturday, September 19, 2026</strong><p class="muted">Pizza Dinner: 4:30–5:00 p.m.<br>Seminar: 5:00–7:30 p.m.</p></div></div>
+        <div class="seminar-row">{icon("calendar-days", "icon-sm")}<div><strong>Saturday, September 19, 2026</strong><p class="muted">Pizza Dinner: 4:30–5:00 p.m.<br>Seminar: 5:00–7:30 p.m.</p></div></div>
         <div class="divider"></div>
-        <div class="seminar-row">{icon("map-pin")}<div><strong>Ottawa Bahá’í Centre</strong><p class="muted">211 McArthur Ave, Ottawa</p></div></div>
+        <div class="seminar-row">{icon("map-pin", "icon-sm")}<div><strong>Ottawa Bahá’í Centre</strong><p class="muted">211 McArthur Ave, Ottawa</p></div></div>
         <div class="divider"></div>
         <div class="seminar-row"><span class="fee-badge">$</span><div><strong>Fee: $10</strong><p class="muted">Includes pizza, snacks, and materials.</p></div></div>
         <div class="bring-box"><strong>What to bring:</strong> A pen, notebook, and something firm to write on. Everything else is provided.</div>
-        <a class="btn btn-primary btn-lg btn-block" style="margin-top:1.75rem;" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right")}</a>
+        <a class="btn btn-primary btn-lg btn-block" style="margin-top:1.75rem;" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>
         <p class="seminar-fine">Space is limited. Registration includes pizza, snacks, and workshop materials.</p>
       </aside>
     </div>
@@ -245,7 +242,7 @@ def questions_html():
     for i, q in enumerate(QUESTIONS):
         cls = "question-card full" if i == len(QUESTIONS) - 1 else "question-card"
         cards += f'<div class="{cls}"><span class="question-num">{i + 1}</span><p>{esc(q)}</p></div>'
-    return f"""<section>
+    return f"""<section class="bg-sage">
   <div class="container">
     {section_heading("Practical clarity", "Students will leave able to answer:")}
     <div class="question-grid">{cards}</div>
@@ -263,12 +260,12 @@ def journey_html():
         top_right = (
             '<span class="journey-badge">Open for Registration</span>'
             if active
-            else f'<span class="lock">{icon("lock-keyhole")}</span>'
+            else f'<span class="lock">{icon("lock-keyhole", "icon-sm")}</span>'
         )
         cta = (
-            f'<a class="btn btn-primary" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right")}</a>'
+            f'<a class="btn btn-primary" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>'
             if active
-            else f'<button class="btn btn-disabled" disabled>{icon("lock-keyhole")} {esc(s["requirement"])}</button>'
+            else f'<button class="btn btn-disabled" disabled>{icon("lock-keyhole", "icon-xs")} {esc(s["requirement"])}</button>'
         )
         cards += (
             f'<article class="{cls}">'
@@ -283,7 +280,7 @@ def journey_html():
   <div class="container">
     {section_heading("The workshop journey", "A learning journey, not just a one-time workshop", "The workshops are designed as a sequence. Each session builds on the ideas, language, and practical tools introduced in the previous one.")}
     <div class="journey-grid">{cards}</div>
-    <div class="prereq-note">{icon("lock-keyhole")}<p><strong>Why prerequisites?</strong> The series builds a shared foundation. Students who begin with Seminar 1 will be better prepared to get the most from later sessions.</p></div>
+    <div class="prereq-note">{icon("lock-keyhole", "icon-sm")}<p><strong>Why prerequisites?</strong> The series builds a shared foundation. Students who begin with Seminar 1 will be better prepared to get the most from later sessions.</p></div>
   </div>
 </section>
 """
@@ -291,19 +288,15 @@ def journey_html():
 
 def difference_html():
     items = "".join(
-        f'<div class="difference-item"><span class="difference-check">{icon("check")}</span>'
+        f'<div class="difference-item"><span class="difference-check">{icon("check", "icon-xs")}</span>'
         f'<div><h3>{esc(title)}</h3><p>{esc(text)}</p></div></div>'
         for title, text in DIFFERENCES
     )
     return f"""<section class="bg-sky">
-  <div class="container">
-    <div class="difference-grid">
-      <img src="/assets/img/workshop-session.jpg" width="999" height="562" alt="Students participating in an interactive learning workshop" loading="lazy" />
-      <div>
-        {section_heading("What makes this different", "More than productivity tips")}
-        <div class="difference-list">{items}</div>
-      </div>
-    </div>
+  <div class="parallax-banner" style="background-image:url('/assets/img/workshop-session.jpg')" role="img" aria-label="Martin leading a seminar with a group of students seated in a circle"></div>
+  <div class="container difference-content">
+    {section_heading("What makes this different", "More than productivity tips")}
+    <div class="difference-list">{items}</div>
   </div>
 </section>
 """
@@ -314,19 +307,16 @@ def facilitator_html():
   <div class="container-narrow">
     <div class="facilitator-grid">
       <div class="facilitator-portrait">
-        <div>
-          <div class="initials">FN</div>
-          <p class="placeholder-label">Portrait placeholder</p>
-        </div>
+        <img src="/assets/img/facilitator.jpg" width="480" height="600" alt="Martin Braithwaite, Workshop Facilitator" loading="lazy" />
       </div>
       <div>
-        {section_heading("Meet the facilitator", "[Facilitator Name]")}
+        {section_heading("Meet the facilitator", "Martin Braithwaite")}
         <p class="facilitator-role">Workshop Facilitator</p>
         <div class="facilitator-bio">
-          <p>[Add a short, welcoming biography here. Include relevant teaching, mentoring, or youth-work experience and what drew the facilitator to this workshop series.]</p>
-          <p>The facilitator brings experience working with young people, teaching and mentoring students, and helping learners connect academic success with deeper questions of purpose, growth, and contribution.</p>
+          <p>Martin is an experienced educator and mentor dedicated to helping young people thrive both academically and personally. Over the past decade, he has guided students across Canada, Mainland China, and Macau, teaching within both public and private systems across local and international (IB) curricula. He has taught IB Psychology, university-level business and computer science, and moral empowerment and character development programs.</p>
+          <p>Having benefited from study skills workshops firsthand as a student, Martin is passionate about facilitating this series to help learners connect practical academic strategies with deeper questions of personal growth and purpose.</p>
         </div>
-        <blockquote class="facilitator-quote">“The goal is not only to help students perform better on their next test, but to help them become more capable, confident, and purposeful learners.”</blockquote>
+        <blockquote class="facilitator-quote">“When we connect daily study habits with a deeper sense of purpose, students don’t just achieve better results—they gain the agency to shape their own futures.”</blockquote>
       </div>
     </div>
   </div>
@@ -344,7 +334,7 @@ def updates_html():
       </div>
       <div class="form-card">
         <div id="updates-success" class="form-success" hidden>
-          <span class="check">{icon("check")}</span>
+          <span class="check">{icon("check", "icon-lg")}</span>
           <h3>Thank you!</h3>
           <p>We’ll keep you informed about upcoming From Grades to Growth seminars.</p>
         </div>
@@ -375,7 +365,11 @@ def footer_html():
       <p class="tagline">Practical learning workshops for Ottawa students in Grades 6–12.</p>
     </div>
     <div><p class="footer-hosted">Hosted in Ottawa, Canada</p></div>
-    <div class="footer-col-right"><a class="footer-register" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 →</a></div>
+    <div class="footer-col-right">
+      <p class="footer-contact-label">Reach out:</p>
+      <a class="footer-contact-link" href="mailto:mbraithwaite2026@gmail.com">mbraithwaite2026@gmail.com</a>
+      <a class="footer-contact-link" href="tel:+13433224841">+1 (343) 322-4841</a>
+    </div>
   </div>
   <div class="container footer-bottom">© 2026 From Grades to Growth. All rights reserved.</div>
 </footer>
@@ -458,9 +452,9 @@ def page(css_href):
         header_html()
         + hero_html()
         + about_html()
-        + seminar_html()
         + questions_html()
         + journey_html()
+        + seminar_html()
         + difference_html()
         + facilitator_html()
         + updates_html()
