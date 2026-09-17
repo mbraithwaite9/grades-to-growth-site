@@ -1,0 +1,9 @@
+# Netlify config for From Grades to Growth.
+#
+# Only needed when deploying from GitHub. It tells Netlify which folder to serve.
+# Security headers and redirects live in site/_headers and site/_redirects instead,
+# so they also apply when the site folder is deployed by drag and drop.
+
+[build]
+  publish = "site"
+  command = ""
