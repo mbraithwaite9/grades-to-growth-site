@@ -86,7 +86,7 @@ QUESTIONS = [
 ]
 
 SEMINARS = [
-    dict(number="01", label="Seminar 1 · Open for Registration",
+    dict(number="01", label="Seminar 1 · Registration Closed",
          title="Grades, Learning, and Study Skills That Actually Work",
          text="Retrieval practice, spacing, test preparation, attendance, communicating with teachers, and the difference between memorizing information and understanding concepts.",
          active=True),
@@ -155,7 +155,7 @@ def header_html():
     </a>
     <nav aria-label="Main navigation" class="main-nav">{nav_items}</nav>
     <div class="header-actions">
-      <a class="btn btn-primary" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1</a>
+      <a class="btn btn-primary" href="#updates">Register for Info</a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
         {icon("menu")}
       </button>
@@ -190,7 +190,7 @@ def hero_html():
       <p class="hero-sub">Practical workshops that help students<br>improve their grades, learn and think more deeply,<br>and develop habits for school and life.</p>
       <p class="hero-body">This series gives students practical,<br>research-informed strategies<br>they can use immediately.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>
+        <a class="btn btn-primary btn-lg" href="#updates">Register for Info {icon("arrow-right", "icon-xs")}</a>
       </div>
     </div>
   </div>
@@ -233,11 +233,11 @@ def seminar_html():
       <aside class="seminar-card">
         <div class="seminar-row">{icon("calendar-days", "icon-sm")}<div><strong>Friday, September 25, 2026</strong><p class="muted">Pizza Dinner: 5:00–5:30 p.m.<br>Seminar: 5:30–8:00 p.m.</p></div></div>
         <div class="divider"></div>
-        <div class="seminar-row">{icon("map-pin", "icon-sm")}<div><strong>Ottawa Bahá’í Centre</strong><p class="muted">211 McArthur Ave, Ottawa</p></div></div>
+        <div class="seminar-row">{icon("map-pin", "icon-sm")}<div><strong>McArthur Ave, Ottawa</strong></div></div>
         <div class="divider"></div>
         <div class="seminar-row"><span class="fee-badge">$</span><div><strong>Fee: $10</strong><p class="muted">Includes pizza, snacks, and materials.</p></div></div>
         <div class="bring-box"><strong>What to bring:</strong> A pen, notebook, and something firm to write on. Everything else is provided.</div>
-        <a class="btn btn-primary btn-lg btn-block" style="margin-top:1.75rem;" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>
+        <a class="btn btn-primary btn-lg btn-block" style="margin-top:1.75rem;" href="#updates">Register for Info {icon("arrow-right", "icon-xs")}</a>
         <p class="seminar-fine">Space is limited. Registration includes pizza, snacks, and workshop materials.</p>
       </aside>
     </div>
@@ -267,12 +267,12 @@ def journey_html():
         active = s.get("active")
         cls = "journey-card active" if active else "journey-card"
         top_right = (
-            '<span class="journey-badge">Open for Registration</span>'
+            '<span class="journey-badge">Registration Closed</span>'
             if active
             else f'<span class="lock">{icon("lock-keyhole", "icon-sm")}</span>'
         )
         cta = (
-            f'<a class="btn btn-primary" href="{REGISTER_URL}" target="_blank" rel="noreferrer">Register for Seminar 1 {icon("arrow-right", "icon-xs")}</a>'
+            f'<a class="btn btn-primary" href="#updates">Register for Info {icon("arrow-right", "icon-xs")}</a>'
             if active
             else f'<button class="btn btn-disabled" disabled>{icon("lock-keyhole", "icon-xs")} {esc(s["requirement"])}</button>'
         )
